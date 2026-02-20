@@ -1,0 +1,37 @@
+apiVersion: argoproj.io/v1alpha1
+kind: ApplicationSet
+metadata:
+  name: nginx-fleet
+  namespace: argocd
+spec:
+  generators:
+  - list:
+      elements:
+        - env: dev
+          ns: nginx-dev
+          # We pass the YAML keys as a flat string
+          sync: "automated" 
+        - env: qa
+          ns: nginx-qa
+          sync: "automated"
+        - env: prod
+          ns: nginx-prod
+          sync: "manual"
+  template:
+    metadata:
+      name: 'nginx-{{env}}'
+    spec:
+      project: default
+      source:
+        repoURL: https://github.com/sprakriy/openshift-separate-environments-deployments.git
+        targetRevision: HEAD
+        path: 'apps/nginx/base/overlays/{{env}}'
+      destination:
+        server: https://kubernetes.default.svc
+        namespace: '{{ns}}'
+      syncPolicy:
+        # We wrap the variable in quotes so 'oc apply' sees it as a string
+        # ArgoCD will then render it into the final Application
+        "{{sync}}": 
+          prune: true
+          selfHeal: true
