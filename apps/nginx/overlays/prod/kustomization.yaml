@@ -6,7 +6,8 @@ resources:
 nameSuffix: -prod
 
 Labels:
-  variant: production
+  pairs:
+    variant: production
 
 patches:
 - target:

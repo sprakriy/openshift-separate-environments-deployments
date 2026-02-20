@@ -6,7 +6,8 @@ resources:
 nameSuffix: -qa
 
 Labels:
-  variant: qa
+  - pairs:
+      variant: qa
 
 patches:
 - target:

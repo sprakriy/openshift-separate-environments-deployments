@@ -8,7 +8,8 @@ nameSuffix: -dev
 
 # Flag 2: Add a label for easy filtering
 Labels:
-  variant: development
+  - pairs:
+      variant: development
 
 # Flag 3: Small scale for Dev
 patches:
