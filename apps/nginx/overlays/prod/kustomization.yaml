@@ -5,7 +5,7 @@ resources:
 
 nameSuffix: -prod
 
-Labels:
+labels:
   pairs:
     variant: production
 
