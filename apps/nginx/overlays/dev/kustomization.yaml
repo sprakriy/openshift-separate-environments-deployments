@@ -7,7 +7,7 @@ resources:
 nameSuffix: -dev
 
 # Flag 2: Add a label for easy filtering
-Labels:
+labels:
   - pairs:
       variant: development
 
